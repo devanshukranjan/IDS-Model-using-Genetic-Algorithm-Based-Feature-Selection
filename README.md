@@ -13,7 +13,7 @@ The notebook builds an Intrusion Detection System (IDS) for the Bot-IoT dataset.
 The full flow for the dataset used by this IDS notebook is:
 
 ```text
-Raw Bot-IoT 5% dataset files
+Raw Bot-IoT 5% dataset files downloaded from the official source
         |
         v
 pre-processing-bot-iot.ipynb
@@ -52,7 +52,7 @@ The IDS notebook does not start from the raw Bot-IoT files directly. It starts f
 
 ### 1. Load Raw Bot-IoT Files
 
-The preprocessing notebook loads raw Bot-IoT 5% CSV files from the local project folder when available:
+The preprocessing notebook loads raw Bot-IoT 5% CSV files downloaded from the official source. In this project, those files are read from the local project folder when available:
 
 ```python
 Path("5%/All features")
@@ -182,6 +182,12 @@ In this project folder, that generated file is available at:
 Datasets/bot_iot_5_preprocessed_dataset.csv
 ```
 
+Download link:
+
+```text
+https://1024terabox.com/s/1zpKP-cYJjDANqhfbTQcOGQ
+```
+
 This is the exact file loaded by `ids-with-ga-feature-selection-over-bot-iot.ipynb`.
 
 ## Project Objective
@@ -203,6 +209,12 @@ The notebook uses this local dataset:
 
 ```text
 Datasets/bot_iot_5_preprocessed_dataset.csv
+```
+
+Dataset download link:
+
+```text
+https://1024terabox.com/s/1zpKP-cYJjDANqhfbTQcOGQ
 ```
 
 The input dataset has:
@@ -591,8 +603,16 @@ In simple terms, this project performs the following:
 | --- | --- |
 | `pre-processing-bot-iot.ipynb` | Creates the preprocessed Bot-IoT dataset used as input by the IDS notebook |
 | `ids-with-ga-feature-selection-over-bot-iot.ipynb` | Main notebook explained in this README |
-| `Datasets/bot_iot_5_preprocessed_dataset.csv` | Input preprocessed Bot-IoT dataset |
+| `Datasets/bot_iot_5_preprocessed_dataset.csv` | Input preprocessed Bot-IoT dataset. Download: https://1024terabox.com/s/1zpKP-cYJjDANqhfbTQcOGQ |
 | `Datasets/bot_iot_5_ga_feature_selection_dataset.csv` | Output dataset after GA feature selection |
+
+## Important Notes
+
+- The notebook works on an already preprocessed dataset. Encoding and scaling of raw Bot-IoT fields happened before this notebook.
+- The final model reports perfect accuracy on the notebook's saved run. Because the dataset is very imbalanced and the score is extremely high, the result should be validated carefully before claiming real-world generalization.
+- The GA is computationally expensive because each chromosome evaluation trains an XGBoost model.
+- The selected feature set may change in another run because the GA uses random initialization, random parent selection, crossover, and mutation without a fixed global random seed for every random source.
+
 
 ## Important Notes
 
